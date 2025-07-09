@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Kerja</title>
+    <link rel="stylesheet" href="style-en-US.css" type="text/css" media="all" />
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CV Lamaran</h1>
+        <form id="jobApplicationForm">
+            <div class="form-group">
+                <label for="fullName">Nama Lengkap:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">No.HP/WA:</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="position">Melamar untuk:</label>
+                <select id="position" name="position" required>
+                    <option value="">Select a Position</option>
+                    <option value="softwareEngineer">Software Engineer</option>
+                    <option value="productManager">Product Manager</option>
+                    <option value="uxDesigner">UX Designer</option>
+                    <option value="dataAnalyst">Data Analyst</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="resume">Upload CV (PDF only):</label>
+                <input type="file" id="resume" name="resume" accept=".pdf" required>
+            </div>
+
+            <div class="form-group">
+                <label for="coverLetter">Teks Pengawal (Optional):</label>
+                <textarea id="coverLetter" name="coverLetter" rows="5"></textarea>
+            </div>
+
+            <div class="radio-group">
+                <label>Apakah anda legal untuk bekerja di (fill your country)?</label><br>
+                <input type="radio" id="workAuthYes" name="workAuthorization" value="yes" required>
+                <label for="workAuthYes">Ya</label>
+                <input type="radio" id="workAuthNo" name="workAuthorization" value="no">
+                <label for="workAuthNo">Tidak</label>
+            </div>
+
+            <div class="checkbox-group">
+                <label>Bagaimana anda tahu tentang tempat ini?</label><br>
+                <input type="checkbox" id="linkedin" name="source" value="linkedin">
+                <label for="linkedin">LinkedIn</label>
+                <input type="checkbox" id="indeed" name="source" value="indeed">
+                <label for="indeed">Melihat Brosur</label>
+                <input type="checkbox" id="website" name="source" value="website">
+                <label for="website">Website Perusahaan</label>
+                <input type="checkbox" id="referral" name="source" value="referral">
+                <label for="referral">Referral</label>
+                <input type="checkbox" id="otherSource" name="source" value="other">
+                <label for="otherSource">Dll.</label>
+            </div>
+
+            <button type="submit">Kirim</button>
+        </form>
+        <div id="successMessage">
+            Lamaran kamu telah dikirim! Tunggu beperapa saat.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // In a real application, you would send this data to a server.
+            // For demonstration, we'll just show a success message.
+
+            // Get form data (for demonstration purposes, not actually sent anywhere)
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                position: document.getElementById('position').value,
+                // For file inputs, you'd typically handle file uploads differently (e.g., using FormData and AJAX)
+                // resume: document.getElementById('resume').files[0],
+                coverLetter: document.getElementById('coverLetter').value,
+                workAuthorization: document.querySelector('input[name="workAuthorization"]:checked')?.value,
+                source: Array.from(document.querySelectorAll('input[name="source"]:checked')).map(cb => cb.value)
+            };
+
+            console.log('Form Data Submitted:', formData);
+
+            // Display success message
+            document.getElementById('jobApplicationForm').style.display = 'none'; // Hide the form
+            document.getElementById('successMessage').style.display = 'block'; // Show success message
+        });
+    </script>
+</body>
+</html>
